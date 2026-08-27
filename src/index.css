@@ -1,1 +1,169 @@
 @import "tailwindcss";
+
+@theme {
+  --color-night-950: #0a0f26;
+  --color-night-900: #0d1330;
+  --color-night-800: #131b42;
+  --color-night-700: #1b2554;
+  --color-night-600: #27336e;
+  --color-night-line: #33407f;
+  --color-star: #ffb43a;
+  --color-star-deep: #d98a1f;
+  --color-gem: #35e0c2;
+  --color-gem-deep: #17997f;
+  --color-ember: #ff5d73;
+  --color-moon: #e9edff;
+  --font-display: "Lalezar", "Vazirmatn", sans-serif;
+  --font-body: "Vazirmatn", sans-serif;
+}
+
+html,
+body {
+  font-family: var(--font-body);
+  background: var(--color-night-950);
+  color: var(--color-moon);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ---------- game chrome ---------- */
+
+.hud-panel {
+  background: linear-gradient(165deg, rgba(19, 27, 66, 0.92), rgba(10, 15, 38, 0.92));
+  border: 1.5px solid var(--color-night-line);
+  box-shadow:
+    0 6px 0 rgba(4, 7, 22, 0.55),
+    0 14px 34px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.panel-cut {
+  clip-path: polygon(
+    12px 0, 100% 0, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 0 100%, 0 12px
+  );
+}
+.panel-cut-sm {
+  clip-path: polygon(
+    7px 0, 100% 0, 100% calc(100% - 7px),
+    calc(100% - 7px) 100%, 0 100%, 0 7px
+  );
+}
+
+.kbd-chip {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 1;
+  padding: 4px 7px 3px;
+  color: var(--color-moon);
+  background: linear-gradient(#2b3876, #1b2554);
+  border: 1px solid var(--color-night-line);
+  border-bottom: 3px solid #0b1030;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.btn-game {
+  font-family: var(--font-display);
+  cursor: pointer;
+  border: none;
+  clip-path: polygon(
+    14px 0, 100% 0, 100% calc(100% - 14px),
+    calc(100% - 14px) 100%, 0 100%, 0 14px
+  );
+  transition: transform 0.08s ease, filter 0.12s ease;
+}
+.btn-game:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+.btn-game:active {
+  transform: translateY(3px);
+}
+
+.title-shadow {
+  text-shadow:
+    0 4px 0 rgba(6, 9, 26, 0.95),
+    0 10px 26px rgba(255, 180, 58, 0.28);
+}
+
+.vignette {
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(5, 8, 22, 0.62) 100%);
+}
+
+/* ---------- fx flashes ---------- */
+
+.fx-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  animation: fxflash 0.65s ease-out forwards;
+}
+.fx-flash.hit { background: radial-gradient(circle, rgba(255, 93, 115, 0.4), rgba(255, 93, 115, 0.12)); }
+.fx-flash.good { background: radial-gradient(circle, rgba(53, 224, 194, 0.32), rgba(53, 224, 194, 0.08)); }
+.fx-flash.gold { background: radial-gradient(circle, rgba(255, 180, 58, 0.4), rgba(255, 180, 58, 0.1)); }
+
+@keyframes fxflash {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ---------- animations ---------- */
+
+.anim-pop { animation: pop 0.4s cubic-bezier(0.34, 1.8, 0.5, 1); }
+@keyframes pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.anim-rise { animation: rise 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) both; }
+@keyframes rise {
+  from { transform: translateY(26px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.anim-float { animation: floaty 3.4s ease-in-out infinite; }
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+.anim-toast { animation: toast 0.32s cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes toast {
+  from { transform: translateY(-16px) scale(0.85); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.anim-blink { animation: blink 0.9s steps(2, start) infinite; }
+@keyframes blink {
+  50% { opacity: 0.25; }
+}
+
+.anim-gem { animation: gemspin 2.2s ease-in-out infinite; }
+@keyframes gemspin {
+  0%, 100% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+}
+
+.anim-star { animation: starin 0.55s cubic-bezier(0.34, 1.9, 0.5, 1) both; }
+@keyframes starin {
+  from { transform: scale(0) rotate(-70deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.anim-heart { animation: heartbeat 0.5s ease; }
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+.anim-shake-x { animation: shakex 0.4s ease; }
+@keyframes shakex {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
